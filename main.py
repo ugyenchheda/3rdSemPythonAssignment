@@ -1,28 +1,22 @@
 import os
 
-altitude = []
-current_directory = os.getcwd()
-print("Current Working Directory:", current_directory)
+altitude_file_path = os.path.join(os.getcwd(), 'fileOne.asc')
 
-altitude_file_path = os.path.join(current_directory, 'fileOne.asc')
-
-directory_contents = os.listdir(os.getcwd())
-print("Directory Contents:", directory_contents)
 try:
     with open(altitude_file_path, 'r') as altitude:
-        #altitudes = altitude.read()
-        #print(altitudes)
+        # Read the first thirty rows
+        for _ in range(3):
+            line = altitude.readline().strip()
+            if not line:
+                break  # End of file reached
+            columns = line.split()
 
-        #lets read row first
-        for height in altitude:
-            columns= height.strip().split()
-
-        #now time for column
-            for column in columns:
-                print(column, end='\t')
-
+            # Read the first thirty columns in each row
+            for i, column in enumerate(columns):
+                if i < 3:
+                    print(column, end='\t')
             print()
-        
+
 except FileNotFoundError:
     print(f"The file '{altitude_file_path}' does not exist.")
 
