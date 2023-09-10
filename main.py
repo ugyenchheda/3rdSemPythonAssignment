@@ -9,9 +9,19 @@ altitude_file_path = os.path.join(current_directory, 'fileOne.asc')
 directory_contents = os.listdir(os.getcwd())
 print("Directory Contents:", directory_contents)
 try:
-    with open(altitude_file_path, 'r') as file:
-        altitudes = file.read()
-        print(altitudes)
+    with open(altitude_file_path, 'r') as altitude:
+        #altitudes = altitude.read()
+        #print(altitudes)
+
+        #lets read row first
+        for height in altitude:
+            columns= height.strip().split()
+
+        #now time for column
+            for column in columns:
+                print(column, end='\t')
+
+            print()
         
 except FileNotFoundError:
     print(f"The file '{altitude_file_path}' does not exist.")
